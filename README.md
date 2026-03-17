@@ -15,6 +15,18 @@ AssignHub is a modern, full-stack web application designed to help students mana
 - **Urgent Task Labeling**: Tasks due within 7 days are automatically highlighted.
 - **Overdue Detection**: Past-due tasks are clearly marked as `OVERDUE`.
 - **Email Reminders**: Automated daily background tasks that scan for assignments due within the next 24 hours and send email notifications to users.
+### **Filtering & Sorting**
+- Filter tasks by course or status (`todo`, `doing`, `done`).
+- Sort tasks by deadline or creation date in ascending or descending order.
+### **Statistics**
+- View overall task completion percentage with a progress bar.
+- View per-course completion progress.
+- Summary cards showing total, completed, in-progress, and overdue task counts.
+### **Search**
+- Search tasks by title or description in real time from the Statistics page.
+### **Profile Management**
+- View and update personal information (first name, last name).
+- Change account password with validation.
 
 ## 🛠️ Tech Stack
 
@@ -30,7 +42,7 @@ AssignHub is a modern, full-stack web application designed to help students mana
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Icons**: [Lucide Icons](https://lucide.dev/)
 - **HTTP Client**: [Axios](https://axios-http.com/)
-
+- **Date Picker**: [Flatpickr](https://flatpickr.js.org/)
 ## 📂 Project Structure
 
 ```text
@@ -109,6 +121,8 @@ A Python test script is provided to verify all API functionalities:
 ```bash
 python test-py-api.py
 ```
+### API Testing with Apifox
+All API endpoints can be tested using [Apifox](https://apifox.com). Send a POST request to `/api/login` to obtain a JWT token, then include it in the `Authorization: Bearer <token>` header for all subsequent requests.
 
 ## 📄 License
 This project is licensed under the MIT License.

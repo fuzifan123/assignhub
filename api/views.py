@@ -14,6 +14,7 @@ from .serializers import UserSerializer, LoginSerializer, CourseSerializer, Task
 
 # Auth Views
 class RegisterView(generics.CreateAPIView):
+    """Handles user registration and returns JWT token on success."""
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
@@ -33,6 +34,7 @@ class RegisterView(generics.CreateAPIView):
         }, status=status.HTTP_201_CREATED)
 
 class LoginView(generics.GenericAPIView):
+    """Authenticates user credentials and returns JWT token."""
     serializer_class = LoginSerializer
     permission_classes = [AllowAny]
 
@@ -53,6 +55,7 @@ class LoginView(generics.GenericAPIView):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def dashboard(request):
+    """Returns user's courses and tasks due within the next 24 hours."""
     user = request.user
     
     # Courses
@@ -89,6 +92,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 # Task ViewSet
 class TaskViewSet(viewsets.ModelViewSet):
+    """CRUD operations for tasks with filtering by course, status, and deadline."""
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
 

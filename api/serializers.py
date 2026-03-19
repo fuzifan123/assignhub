@@ -4,6 +4,7 @@ from .models import User, Course, Task
 from django.contrib.auth import authenticate
 
 class UserSerializer(serializers.ModelSerializer):
+    """Serializer for user registration with password validation rules."""
     class Meta:
         model = User
         fields = ('id', 'email', 'password')
@@ -44,6 +45,7 @@ class CourseSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'created_at')
 
 class TaskSerializer(serializers.ModelSerializer):
+    """Serializer for task CRUD with course ownership verification."""
     course_name = serializers.CharField(source='course.name', read_only=True)
     course_id = serializers.PrimaryKeyRelatedField(
         queryset=Course.objects.all(), source='course', write_only=False

@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 
 class CustomUserManager(BaseUserManager):
+    """Custom manager using email instead of username for authentication."""
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError(_('The Email field must be set'))
@@ -25,6 +26,7 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class User(AbstractUser):
+    """Custom user model with email as the unique identifier instead of username."""
     username = None
     email = models.EmailField(_('email address'), unique=True)
 
@@ -37,6 +39,7 @@ class User(AbstractUser):
         return self.email
 
 class Course(models.Model):
+    """Represents a course/subject that a student is enrolled in."""
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='courses')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -45,6 +48,7 @@ class Course(models.Model):
         return self.name
 
 class Task(models.Model):
+    """Represents an assignment or task linked to a course with deadline tracking."""
     STATUS_CHOICES = [
         ('todo', 'todo'),
         ('doing', 'doing'),
